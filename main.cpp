@@ -29,6 +29,9 @@ double apskaiciuotiMediana(std::vector<int> pazymiai) {
 
 
 void Duom(Student& studentas) {
+    std::string kitas_stud = "T";
+    while(kitas_stud == "T" || kitas_stud == "t")
+    {
     std::cout << "Įveskite studento vardą: ";
     std::cin >> studentas.vardas;
     std::cout << "Įveskite studento pavardę: ";
@@ -44,6 +47,17 @@ void Duom(Student& studentas) {
 
     std::cout << "Įveskite egzamino rezultatą: ";
     std::cin >> studentas.egz;
+    std::string kitas;
+    std::cout<<"Ar norite testi? (T - taip, N - ne): ";
+    std::cin>>kitas;
+    if(kitas == "T" || kitas == "t")
+        kitas_stud = "T";
+    else{
+        kitas_stud = "N";
+    }
+    
+    }
+    
     
 }
 
