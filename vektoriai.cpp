@@ -17,6 +17,17 @@ double apskaiciuotiMediana(std::vector<int> pazymiai) {
         return pazymiai[dydis / 2];
     }
 }
+void gen_name(std::string& vardas, std::string& pavarde) {
+    std::vector<std::string> vardai = {"Pijus", "Justas", "Kostas", "Petras"};
+    std::vector<std::string> pavardes = {"Savanevicius", "Andru", "Baranauskas", "Dovydaitis"};
+
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> distr(0, vardai.size() - 1);
+
+    vardas = vardai[distr(gen)];
+    pavarde = pavardes[distr(gen)];
+}
 
 void Duom(std::vector<Student>& studentai) {
     std::random_device rd;
@@ -26,18 +37,15 @@ void Duom(std::vector<Student>& studentai) {
     std::string kitas_stud = "T";
     while (kitas_stud == "T" || kitas_stud == "t") {
         Student studentas;
-        std::cout << "Įveskite studento vardą: ";
-        std::cin >> studentas.vardas;
-        std::cout << "Įveskite studento pavardę: ";
-        std::cin >> studentas.pavarde;
-
-        std::cout << "1 - įvesti pažymius rankiniu būdu\n2 - generuoti atsitiktinius pažymius\n";
+        std::cout << "1 - įvesti pažymius rankiniu būdu\n2 - generuoti atsitiktinius pažymius\n3 - generuoti vardus, pavardes ir pazymius\n4 - baigti\n";
         int ch;
         std::cin >> ch;
-
-        studentas.namuDarbai.clear();
-
+        if (ch == 4) break;
         if (ch == 1) {
+            std::cout << "Įveskite studento vardą: ";
+            std::cin >> studentas.vardas;
+            std::cout << "Įveskite studento pavardę: ";
+            std::cin >> studentas.pavarde;
             std::cout << "Įveskite namų darbų pažymius (įveskite -1, kad baigtumėte): ";
             int pazymys;
             while (true) {
@@ -48,15 +56,26 @@ void Duom(std::vector<Student>& studentai) {
             std::cout << "Įveskite egzamino rezultatą: ";
             std::cin >> studentas.egz;
         } 
-        else if (ch == 2) {
+        if (ch == 2) {
+            std::cout << "Įveskite studento vardą: ";
+            std::cin >> studentas.vardas;
+            std::cout << "Įveskite studento pavardę: ";
+            std::cin >> studentas.pavarde;
 
             for (int i = 0; i < 5; i++) {
                 studentas.namuDarbai.push_back(distr(gen));
             }
 
             studentas.egz = distr(gen);
-            
         }
+        if (ch == 3) {
+            gen_name(studentas.vardas, studentas.pavarde);
+            for (int i = 0; i < 5; i++) {
+                studentas.namuDarbai.push_back(distr(gen));
+            }
+            studentas.egz = distr(gen);
+        }
+        studentas.namuDarbai.clear();
 
         studentai.push_back(studentas);
 

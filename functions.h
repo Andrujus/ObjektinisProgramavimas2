@@ -19,5 +19,6 @@ double Vidurkis(const std::vector<int>& pazymiai);
 double apskaiciuotiMediana(std::vector<int> pazymiai);
 void Duom(Student& studentas);
 void Rez(const Student& studentas);
+void gen_name(std::string& vardas, std::string& pavarde);
 
 #endif
