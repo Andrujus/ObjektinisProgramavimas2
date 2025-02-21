@@ -1,6 +1,7 @@
 #ifndef FUNC_MASYVAS_H
 #define FUNC_MASYVAS_H
 
+#include <random>
 #include <iostream>
 #include <iomanip>
 #include <vector>

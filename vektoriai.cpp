@@ -1,19 +1,26 @@
-#include "functions.h"
 #include <iostream>
 #include <vector>
 #include <string>
 #include <iomanip>
 #include <algorithm>
+#include <random>
 
-
+struct Student {
+    std::string vardas;
+    std::string pavarde;
+    std::vector<int> namuDarbai;
+    int egz;
+};
 
 double Vidurkis(const std::vector<int>& pazymiai) {
+    if (pazymiai.empty()) return 0.0;
     double suma = 0.0;
     for (int pazymys : pazymiai) suma += pazymys;
     return suma / pazymiai.size();
 }
 
 double apskaiciuotiMediana(std::vector<int> pazymiai) {
+    if (pazymiai.empty()) return 0.0;
     std::sort(pazymiai.begin(), pazymiai.end());
     size_t dydis = pazymiai.size();
     if (dydis % 2 == 0) {
@@ -23,82 +30,89 @@ double apskaiciuotiMediana(std::vector<int> pazymiai) {
     }
 }
 
+void Duom(std::vector<Student>& studentai) {
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> distr(1, 10);
 
-void Duom(Student& studentas, std::vector<Student>& studentai) {
     std::string kitas_stud = "T";
-    while(kitas_stud == "T" || kitas_stud == "t")
-    {
-    std::cout << "Įveskite studento vardą: ";
-    std::cin >> studentas.vardas;
-    std::cout << "Įveskite studento pavardę: ";
-    std::cin >> studentas.pavarde;
+    while (kitas_stud == "T" || kitas_stud == "t") {
+        Student studentas;
+        std::cout << "Įveskite studento vardą: ";
+        std::cin >> studentas.vardas;
+        std::cout << "Įveskite studento pavardę: ";
+        std::cin >> studentas.pavarde;
 
-    std::cout << "Įveskite namų darbų pažymius (įveskite -1, kad baigtumėte): ";
-    
-    studentas.namuDarbai.clear();
+        std::cout << "1 - įvesti pažymius rankiniu būdu\n2 - generuoti atsitiktinius pažymius\n";
+        int ch;
+        std::cin >> ch;
 
-    int pazymys;
+        studentas.namuDarbai.clear();
 
-    while (true) {
-        std::cin >> pazymys;
-        if (pazymys == -1) break;
-        studentas.namuDarbai.push_back(pazymys);
-    }
+        if (ch == 1) {
+            std::cout << "Įveskite namų darbų pažymius (įveskite -1, kad baigtumėte): ";
+            int pazymys;
+            while (true) {
+                std::cin >> pazymys;
+                if (pazymys == -1) break;
+                studentas.namuDarbai.push_back(pazymys);
+            }
+            std::cout << "Įveskite egzamino rezultatą: ";
+            std::cin >> studentas.egz;
+        } 
+        else if (ch == 2) {
 
-    std::cout << "Įveskite egzamino rezultatą: ";
-    std::cin >> studentas.egz;
-    studentai.push_back(studentas);
-    std::string kitas;
-    std::cout<<"Ar norite testi? (T - taip, N - ne): ";
-    std::cin>>kitas;
-    if(kitas == "T" || kitas == "t")
-        kitas_stud = "T";
-    else{
-        kitas_stud = "N";
-    }
+            for (int i = 0; i < 5; i++) {
+                studentas.namuDarbai.push_back(distr(gen));
+            }
+
+            studentas.egz = distr(gen);
+            
+        }
+
+        studentai.push_back(studentas);
+
+        std::cout << "Ar norite tęsti? (T - taip, N - ne): ";
+        std::cin >> kitas_stud;
     }
 }
 
 void Rez(const std::vector<Student>& studentai, bool n_vid) {
     std::cout << std::fixed << std::setprecision(2);
-    if(n_vid)
-    {
-        std::cout << "-----------------------------------------------------------"<<std::endl;
-        std::cout << "Vardas     Pavarde       Galutunis (vid.)"<<std::endl;
-        std::cout << "-----------------------------------------------------------"<<std::endl;
-    }
+    std::cout << "-----------------------------------------------------------\n";
+    if (n_vid)
+        std::cout << std::setw(15) << "Vardas" << std::setw(15) << "Pavarde" << std::setw(25) << "Galutinis (vid.)\n";
     else
-    {
-        std::cout << "-----------------------------------------------------------"<<std::endl;
-        std::cout << "Vardas    Pavarde      Galutunis (med.)"<<std::endl;
-        std::cout << "-----------------------------------------------------------"<<std::endl;
-    
-    }
+        std::cout << std::setw(15) << "Vardas" << std::setw(15) << "Pavarde" << std::setw(25) << "Galutinis (med.)\n";
+    std::cout << "-----------------------------------------------------------\n";
+
     for (const auto& studentas : studentai) {
         double galutinis;
         if (n_vid) {
-            
             galutinis = Vidurkis(studentas.namuDarbai) * 0.4 + studentas.egz * 0.6;
         } else {
-            
-            double mediana = apskaiciuotiMediana(studentas.namuDarbai);
+            galutinis = apskaiciuotiMediana(studentas.namuDarbai) * 0.4 + studentas.egz * 0.6;
         }
-        
-        std::cout << studentas.vardas << "     " << studentas.pavarde << "       " << galutinis << std::endl;
+
+        std::cout << std::setw(15) << studentas.vardas 
+                  << std::setw(15) << studentas.pavarde 
+                  << std::setw(15) << galutinis << "\n";
     }
 }
 
 int main() {
-    Student studentas;
     std::vector<Student> studentai;
-    Duom(studentas, studentai);
+    Duom(studentai);
+
     std::string vid;
-    std::cout<<"V - vidurkis, M - mediana"<<std::endl;
-    std::cin>>vid;
+    std::cout << "V - vidurkis, M - mediana: ";
+    std::cin >> vid;
+
     if (vid == "V" || vid == "v") {
         Rez(studentai, true);
     } else {
         Rez(studentai, false);
     }
+
     return 0;
 }

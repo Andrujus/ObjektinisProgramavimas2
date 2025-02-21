@@ -1,9 +1,12 @@
 #ifndef FUNCTIONS_H
 #define FUNCTIONS_H
 
+#include <random>
 #include <iostream>
+#include <iomanip>
 #include <vector>
 #include <string>
+#include <algorithm>
 
 struct Student {
     std::string vardas;
