@@ -1,16 +1,4 @@
-#include <iostream>
-#include <vector>
-#include <string>
-#include <iomanip>
-#include <algorithm>
-#include <random>
-
-struct Student {
-    std::string vardas;
-    std::string pavarde;
-    std::vector<int> namuDarbai;
-    int egz;
-};
+#include "functions.h"
 
 double Vidurkis(const std::vector<int>& pazymiai) {
     if (pazymiai.empty()) return 0.0;

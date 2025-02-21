@@ -27,14 +27,22 @@ double apskaiciuotiMediana(const Student& studentas) {
 }
 
 void Duom(Student& studentas, std::vector<Student>& studentai) {
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> distr(1, 10);
     std::string kitas_stud = "T";
     while (kitas_stud == "T" || kitas_stud == "t") {
         std::cout << "Įveskite studento vardą: ";
         std::cin >> studentas.vardas;
         std::cout << "Įveskite studento pavardę: ";
         std::cin >> studentas.pavarde;
-
-        std::cout << "Įveskite namų darbų pažymius (įveskite -1, kad baigtumėte): ";
+        
+        std::cout << "1 - įvesti pažymius rankiniu būdu\n2 - generuoti atsitiktinius pažymius\n";
+        int ch;
+        std::cin >> ch;
+        if (ch == 1)
+        {
+            std::cout << "Įveskite namų darbų pažymius (įveskite -1, kad baigtumėte): ";
         int pazymys;
         std::vector<int> laikinas_masyvas;
         while (true) {
@@ -54,6 +62,18 @@ void Duom(Student& studentas, std::vector<Student>& studentai) {
         std::cin >> studentas.egz;
 
         studentai.push_back(studentas);
+        }
+        else{
+            int ran_pazymys;
+            std::vector<int> laikinas_masyvas;
+            for (int i = 0; i < 5; i++) {
+                ran_pazymys = distr(gen);
+                laikinas_masyvas.push_back(ran_pazymys);
+            }
+            studentas.egz = distr(gen);
+        studentai.push_back(studentas);
+        }
+        
 
         std::cout << "Ar norite tęsti? (T - taip, N - ne): ";
         std::cin >> kitas_stud;
@@ -69,9 +89,14 @@ void Rez(const Student& studentas, bool n_vid) {
     } else {
         Galutinis = apskaiciuotiMediana(studentas) * 0.4 + studentas.egz * 0.6;
     }
+    std::cout << "-----------------------------------------------------------\n";
+    if (n_vid)
+        std::cout << std::setw(15) << "Vardas" << std::setw(15) << "Pavarde" << std::setw(25) << "Galutinis (vid.)\n";
+    else
+        std::cout << std::setw(15) << "Vardas" << std::setw(15) << "Pavarde" << std::setw(25) << "Galutinis (med.)\n";
+    std::cout << "-----------------------------------------------------------\n";
 
-    std::cout << "Studentas: " << studentas.vardas << " " 
-              << studentas.pavarde << " Galutinis: " << Galutinis << std::endl;
+    std::cout << std::setw(15) << studentas.vardas << std::setw(15) << studentas.pavarde << std::setw(15) << Galutinis << std::endl;
 }
 
 int main() {
