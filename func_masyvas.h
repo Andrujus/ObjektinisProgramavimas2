@@ -20,5 +20,6 @@ double Vidurkis(int* pazymiai);
 double apskaiciuotiMediana(int* pazymiai);
 void Duom(Student& studentas);
 void Rez(const Student& studentas);
+void generuotiVardaPavarde(std::string& vardas, std::string& pavarde); // Nauja funkcija
 
 #endif
