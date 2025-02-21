@@ -1,15 +1,11 @@
+#include "functions.h"
 #include <iostream>
 #include <vector>
 #include <string>
 #include <iomanip>
 #include <algorithm>
 
-struct Student {
-    std::string vardas;
-    std::string pavarde;
-    std::vector<int> namuDarbai;
-    int egz;
-};
+
 
 double Vidurkis(const std::vector<int>& pazymiai) {
     double suma = 0.0;
@@ -55,31 +51,19 @@ void Duom(Student& studentas) {
     else{
         kitas_stud = "N";
     }
-    
     }
-    
-    
 }
 
 void Rez(const Student& studentas) {
-    double Galutinis = Vidurkis(studentas.namuDarbai) * 0.4 + studentas.egz * 0.6;
-    std::cout << std::fixed << std::setprecision(2);
-    std::cout << "Studentas: " << studentas.vardas << " " << studentas.pavarde << std::endl;
-    std::cout << "Galutinis: " << Galutinis << std::endl;
-}
-
-int main() {
-    Student studentas;
-    Duom(studentas);
     std::string vid;
     std::cout<<"V - vidurkis, M - mediana"<<std::endl;
     std::cin>>vid;
-    if(vid == "V")
+    if(vid == "V" || vid =="v")
     {
         std::cout << "-----------------------------------------------------------"<<std::endl;
         std::cout << "Vardas     Pavarde       Galutunis (vid.)"<<std::endl;
         std::cout << "-----------------------------------------------------------"<<std::endl;
-            double Galutinis = Vidurkis(studentas.namuDarbai) * 0.4 + studentas.egz * 0.6;
+        double Galutinis = Vidurkis(studentas.namuDarbai) * 0.4 + studentas.egz * 0.6;
         double Galetunis_med = apskaiciuotiMediana(studentas.namuDarbai);
         std::cout << std::fixed << std::setprecision(2);
     
@@ -97,8 +81,11 @@ int main() {
     
         std::cout<< studentas.vardas << "        " << studentas.pavarde << "       " << Galutinis_med;
     }
-    
+}
 
-    
+int main() {
+    Student studentas;
+    Duom(studentas);
+    Rez(studentas);
     return 0;
 }
