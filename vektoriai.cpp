@@ -8,7 +8,7 @@ int main() {
     std::chrono::duration<double> diff;
     int ch1;
     std::vector<Student> studentai;
-    std::vector<int> skaicius = {1000, 10000, 100000};
+    std::vector<int> skaicius = {1000, 10000, 100000, 1000000};
 
     start = std::chrono::system_clock::now();
     Duom(studentai, ch1);
