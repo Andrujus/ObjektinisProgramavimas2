@@ -60,18 +60,22 @@ void failo_nuskaitymas(const std::string& pav, int kiek, std::vector<Student>& s
 {
     std::ifstream rf(pav);
     if (!rf) std::cout<<"failas neatsidaro"<<std::endl;
-    Student studentas;
-    while (rf >> studentas.vardas >> studentas.pavarde) {
-        studentas.namuDarbai.clear();
-        int pazymys;
+    std::string vardas, pavarde;
+    while (rf >> vardas >> pavarde) {
+        std::vector<int> namuDarbai;
         for (int i = 0; i < 5; i++) {
-            if (!(rf >> pazymys)) 
-                throw std::runtime_error("Klaida skaitant pažymius iš failo.");
-            studentas.namuDarbai.push_back(pazymys);
+            int pazymys;
+            rf >> pazymys;
+            namuDarbai.push_back(pazymys);
         }
-        if (!(rf >> studentas.egz))
-            throw std::runtime_error("Klaida skaitant egzamino pažymį iš failo.");
-        studentai.push_back(studentas);
+        int egz;
+        rf >> egz;
+        Student s;
+        s.setVardas(vardas);
+        s.setPavarde(pavarde);
+        s.setNamuDarbai(namuDarbai);
+        s.setEgz(egz);
+        studentai.push_back(s);  
     }
 }
 void padalinti_studentus (std::vector<Student>& studentai, std::vector<Student>& vargsiukai, std::vector<Student>& kietekai)

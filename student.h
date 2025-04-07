@@ -15,10 +15,6 @@ public:
     Student(const std::string& v, const std::string& p, const std::vector<int>& nd, int e) 
         : vardas(v), pavarde(p), namuDarbai(nd), egz(e) {}
 
-    std::string getVardas() const { return vardas; }
-    std::string getPavarde() const { return pavarde; }
-    std::vector<int> getNamuDarbai() const { return namuDarbai; }
-
     void setVardas(const std::string& v) { vardas = v; }
     void setPavarde(const std::string& p) { pavarde = p; }
     void setNamuDarbai(const std::vector<int>& nd) { namuDarbai = nd; }
