@@ -6,13 +6,6 @@
 #include <random>
 #include <chrono>
 
-double Vidurkis(const std::vector<int>& pazymiai) {
-    if (pazymiai.empty()) return 0.0;
-    double suma = 0.0;
-    for (int pazymys : pazymiai) suma += pazymys;
-    return suma / pazymiai.size();
-}
-
 double apskaiciuotiMediana(std::vector<int> pazymiai) {
     if (pazymiai.empty()) return 0.0;
     std::sort(pazymiai.begin(), pazymiai.end());
@@ -81,14 +74,13 @@ void failo_nuskaitymas(const std::string& pav, int kiek, std::vector<Student>& s
 void padalinti_studentus (std::vector<Student>& studentai, std::vector<Student>& vargsiukai, std::vector<Student>& kietekai)
 {
     auto start = std::chrono::high_resolution_clock::now();
-    for (const auto& studentas : studentai)
+    for (const auto& s : studentai)
     {
-        studentas.getGalutinisVid();
-        if (studentas.getGalutinisVid() < 5.0)
+        if (s.getGalutinisVid() < 5.0)
         {
-            vargsiukai.push_back(studentas);
+            vargsiukai.push_back(s);
         }
-        else kietekai.push_back(studentas);
+        else kietekai.push_back(s);
     }
     auto end = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> diff = end - start;

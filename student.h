@@ -24,6 +24,7 @@ public:
     std::string getPavarde() const { return pavarde; }
     std::vector<int> getNamuDarbai() const { return namuDarbai; }
     int getEgz() const { return egz; }
+    double getGalutinisVid() const { return skaiciuotiGalutiniVidurki(); }
 
     static double Vidurkis(const std::vector<int>& pazymiai) {
         if (pazymiai.empty()) return 0.0;
