@@ -121,7 +121,7 @@ void Duom(std::vector<Student>& studentai, int& ch1) {
         {
             std::vector<Student> vargsiukai;
             std::vector<Student> kietekai;
-            std::vector<int> skaicius = {1000, 10000, 100000, 1000000, 10000000};
+            std::vector<int> skaicius = {1000, 10000, 100000};
             for (int i=0; i<skaicius.size(); i++)
             {
                 std::string pav = "studentai_" + std::to_string(skaicius[i]) + ".txt";
