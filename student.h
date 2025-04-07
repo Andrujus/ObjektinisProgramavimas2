@@ -24,5 +24,40 @@ public:
     std::string getPavarde() const { return pavarde; }
     std::vector<int> getNamuDarbai() const { return namuDarbai; }
     int getEgz() const { return egz; }
+
+    static double Vidurkis(const std::vector<int>& pazymiai) {
+        if (pazymiai.empty()) return 0.0;
+        double suma = 0.0;
+        for (int pazymys : pazymiai) suma += pazymys;
+        return suma / pazymiai.size();
+    }
+
+    double skaiciuotiVidurki() const {
+        if (namuDarbai.empty()) return 0.0;
+        double suma = 0.0;
+        for (int pazymys : namuDarbai) {
+            suma += pazymys;
+        }
+        return suma / namuDarbai.size();
+    }
+
+    double skaiciuotiMediana() const {
+        if (namuDarbai.empty()) return 0.0;
+        std::vector<int> temp = namuDarbai;
+        std::sort(temp.begin(), temp.end());
+        size_t dydis = temp.size();
+        if (dydis % 2 == 0) {
+            return (temp[dydis / 2 - 1] + temp[dydis / 2]) / 2.0;
+        } else {
+            return temp[dydis / 2];
+        }
+    }
+    double skaiciuotiGalutiniVidurki() const {
+        return skaiciuotiVidurki() * 0.4 + egz * 0.6;
+    }
+
+    double skaiciuotiGalutiniMediana() const {
+        return skaiciuotiMediana() * 0.4 + egz * 0.6;
+    }
 };
 #endif

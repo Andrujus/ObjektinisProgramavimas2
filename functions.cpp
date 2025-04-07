@@ -83,8 +83,8 @@ void padalinti_studentus (std::vector<Student>& studentai, std::vector<Student>&
     auto start = std::chrono::high_resolution_clock::now();
     for (const auto& studentas : studentai)
     {
-        double galutinis_v = Vidurkis(studentas.namuDarbai) * 0.4 + studentas.egz * 0.6;
-        if (galutinis_v < 5.0)
+        studentas.getGalutinisVid();
+        if (studentas.getGalutinisVid() < 5.0)
         {
             vargsiukai.push_back(studentas);
         }
