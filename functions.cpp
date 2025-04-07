@@ -97,11 +97,10 @@ void issaugoti_studentus(const std::vector<Student>& studentai, const std::strin
     out << std::setw(15) << "Vardas" << std::setw(15) << "Pavarde" << std::setw(15) << "Galutinis (vid.)\n";
     out << "-----------------------------------------------------------\n";
 
-    for (const auto& studentas : studentai) {
-        double galutinis_v = Vidurkis(studentas.namuDarbai) * 0.4 + studentas.egz * 0.6;
-        out << std::setw(15) << studentas.vardas
-            << std::setw(15) << studentas.pavarde
-            << std::setw(15) << galutinis_v << "\n";
+    for (const auto& s : studentai) {
+        out << std::setw(15) << s.getVardas()
+            << std::setw(15) << s.getPavarde()
+            << std::setw(15) << s.getGalutinisVid() << "\n";
     }
 
     out.close();
