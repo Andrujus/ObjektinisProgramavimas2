@@ -155,20 +155,29 @@ void Duom(std::vector<Student>& studentai, int& ch1) {
                     kiek++;
                 }
 
-                while (rf >> studentas.vardas >> studentas.pavarde) {
-                    studentas.namuDarbai.clear();
-                    int pazymys;
+                while (true) {
+                    std::string vardas, pavarde;
+                    std::vector<int> namuDarbai;
+                    int egz;
+                    if (!(rf >> vardas >> pavarde)) break;
 
                     for (int i = 0; i < kiek; i++) {
-                        if (!(rf >> pazymys)) 
+                        int paz;
+                        if (!(rf >> paz)) 
                             throw std::runtime_error("Klaida skaitant pažymius iš failo.");
-                        studentas.namuDarbai.push_back(pazymys);
+                        namuDarbai.push_back(paz);
                     }
 
-                    if (!(rf >> studentas.egz))
+                    if (!(egz))
                         throw std::runtime_error("Klaida skaitant egzamino pažymį iš failo.");
                     
-                    studentai.push_back(studentas);
+                    Student s;
+                    s.setVardas(vardas);
+                    s.setPavarde(pavarde);
+                    s.setNamuDarbai(namuDarbai);
+                    s.setEgz(egz);
+                    
+                    studentai.push_back(s);
                 }
 
             } catch (const std::exception& e) {
