@@ -240,22 +240,22 @@ void Rez(std::vector<Student>& studentai, int& ch1) {
     switch (ch) {
         case 1:
             std::sort(studentai.begin(), studentai.end(), [](const Student& a, const Student& b) {
-                return a.vardas < b.vardas;
+                return a.getVardas() < b.getVardas();
             });
             break;
         case 2:
             std::sort(studentai.begin(), studentai.end(), [](const Student& a, const Student& b) {
-                return a.pavarde < b.pavarde;
+                return a.getPavarde() < b.getPavarde();
             });
             break;
         case 3:
             std::sort(studentai.begin(), studentai.end(), [](const Student& a, const Student& b) {
-                return (Vidurkis(a.namuDarbai) * 0.4 + a.egz * 0.6) < (Vidurkis(b.namuDarbai) * 0.4 + b.egz * 0.6);
+                return a.getGalutinisVid() < b.getGalutinisVid();
             });
             break;
         case 4:
             std::sort(studentai.begin(), studentai.end(), [](const Student& a, const Student& b) {
-                return (apskaiciuotiMediana(a.namuDarbai) * 0.4 + a.egz * 0.6) < (apskaiciuotiMediana(b.namuDarbai) * 0.4 + b.egz * 0.6);
+                return a.getGalutinisMed() < b.getGalutinisMed();
             });
             break;
         default:
@@ -267,14 +267,11 @@ void Rez(std::vector<Student>& studentai, int& ch1) {
     std::cout << std::setw(15) << "Vardas" << std::setw(15) << "Pavarde" << std::setw(25) << "Galutinis (vid.)  Galutinis (med.)\n";
     std::cout << "-----------------------------------------------------------\n";
 
-    for (const auto& studentas : studentai) {
-        double galutinis_v = Vidurkis(studentas.namuDarbai) * 0.4 + studentas.egz * 0.6;
-        double galutinis_m = apskaiciuotiMediana(studentas.namuDarbai) * 0.4 + studentas.egz * 0.6;
-
-        std::cout << std::setw(15) << studentas.vardas 
-                  << std::setw(15) << studentas.pavarde 
-                  << std::setw(15) << galutinis_v
-                  << std::setw(15) << galutinis_m << "\n";
+    for (const auto& s : studentai) {
+        std::cout << std::setw(15) << s.getVardas()
+                  << std::setw(15) << s.getPavarde() 
+                  << std::setw(15) << s.getGalutinisVid()
+                  << std::setw(15) << s.getGalutinisMed() << "\n";
     }
     std::cout << "Ar norite išsaugoti į failą? (T - taip, N - ne): ";
     std::string ats;
@@ -286,14 +283,12 @@ void Rez(std::vector<Student>& studentai, int& ch1) {
         rf << "-----------------------------------------------------------\n";
         rf << std::setw(15) << "Vardas" << std::setw(15) << "Pavarde" << std::setw(25) << "Galutinis (vid.)  Galutinis (med.)\n";
         rf << "-----------------------------------------------------------\n";
-        for (const auto& studentas : studentai) {
-            double galutinis_v = Vidurkis(studentas.namuDarbai) * 0.4 + studentas.egz * 0.6;
-            double galutinis_m = apskaiciuotiMediana(studentas.namuDarbai) * 0.4 + studentas.egz * 0.6;
+        for (const auto& s : studentai) {
 
-            rf << std::setw(15) << studentas.vardas 
-               << std::setw(15) << studentas.pavarde
-               << std::setw(15) << galutinis_v
-               << std::setw(15) << galutinis_m << "\n";
+            rf << std::setw(15) << s.getVardas()
+               << std::setw(15) << s.getPavarde()
+               << std::setw(15) << s.getGalutinisVid()
+               << std::setw(15) << s.getGalutinisMed() << "\n";
         }
     }
     }
