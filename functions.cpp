@@ -176,7 +176,7 @@ void Duom(std::vector<Student>& studentai, int& ch1) {
                     s.setPavarde(pavarde);
                     s.setNamuDarbai(namuDarbai);
                     s.setEgz(egz);
-                    
+
                     studentai.push_back(s);
                 }
 
@@ -185,57 +185,86 @@ void Duom(std::vector<Student>& studentai, int& ch1) {
             }
         }
         if (ch1 == 1) {
+            std::string vardas, pavarde;
+            std::vector<int> namuDarbai;
+            int egz;
             try{
             std::cout << "Įveskite studento vardą: ";
-            std::cin >> studentas.vardas;
-            if (std::isdigit(studentas.vardas[0])) throw std::runtime_error("Vardas negali prasidėti skaičiumi");
+            std::cin >> vardas;
+            if (std::isdigit(vardas[0])) throw std::runtime_error("Vardas negali prasidėti skaičiumi");
             std::cout << "Įveskite studento pavardę: ";
-            std::cin >> studentas.pavarde;
-            if (std::isdigit(studentas.pavarde[0])) throw std::runtime_error("Pavarde negali prasidėti skaičiumi");
+            std::cin >> pavarde;
+            if (std::isdigit(pavarde[0])) throw std::runtime_error("Pavarde negali prasidėti skaičiumi");
             std::cout << "Įveskite namų darbų pažymius (įveskite -1, kad baigtumėte): ";
             int pazymys;
-            studentas.namuDarbai.clear();
+            namuDarbai.clear();
             while (true) {
                 std::cin >> pazymys;
                 if (pazymys < -1 || pazymys > 10) throw std::runtime_error("Pažymys turi būti intervale nuo 1 iki 10");
                 if (pazymys == -1) break;
-                studentas.namuDarbai.push_back(pazymys);
+                namuDarbai.push_back(pazymys);
             }
             if (std::cin.fail()) throw std::runtime_error("Neteisingas pažymys");
             std::cout << "Įveskite egzamino rezultatą: ";
-            std::cin >> studentas.egz;
+            std::cin >> egz;
+
+            Student s;
+            s.setVardas(vardas);
+            s.setPavarde(pavarde);
+            s.setNamuDarbai(namuDarbai);
+            s.setEgz(egz);
+
             } catch (const std::exception& e) {
                 std::cerr << e.what() << std::endl;
             }
             
         }
         if (ch1 == 2) {
+            std::string vardas, pavarde;
+            std::vector<int> namuDarbai;
+            int egz;
             try{
             std::cout << "Įveskite studento vardą: ";
-            std::cin >> studentas.vardas;
-            if (std::isdigit(studentas.vardas[0])) throw std::runtime_error("Vardas negali prasidėti skaičiumi");
+            std::cin >> vardas;
+            if (std::isdigit(vardas[0])) throw std::runtime_error("Vardas negali prasidėti skaičiumi");
             std::cout << "Įveskite studento pavardę: ";
-            std::cin >> studentas.pavarde;
-            if (std::isdigit(studentas.pavarde[0])) throw std::runtime_error("Pavarde negali prasidėti skaičiumi");
-            studentas.namuDarbai.clear();
+            std::cin >> pavarde;
+            if (std::isdigit(pavarde[0])) throw std::runtime_error("Pavarde negali prasidėti skaičiumi");
+            namuDarbai.clear();
             for (int i = 0; i < 5; i++) {
-                studentas.namuDarbai.push_back(distr(gen));
+                namuDarbai.push_back(distr(gen));
             }
-            studentas.egz = distr(gen);
+            egz = distr(gen);
             } catch (const std::exception& e) {
                 std::cerr << e.what() << std::endl;
             }
+            Student s;
+            s.setVardas(vardas);
+            s.setPavarde(pavarde);
+            s.setNamuDarbai(namuDarbai);
+            s.setEgz(egz);
             
         }
         if (ch1 == 3) {
-            gen_name(studentas.vardas, studentas.pavarde);
-            studentas.namuDarbai.clear();
+            std::string vardas, pavarde;
+            std::vector<int> namuDarbai;
+            int egz;
+
+            gen_name(vardas, pavarde);
+            namuDarbai.clear();
             for (int i = 0; i < 5; i++) {
-                studentas.namuDarbai.push_back(distr(gen));
+                namuDarbai.push_back(distr(gen));
             }
-            studentas.egz = distr(gen);
+            egz = distr(gen);
+        
+            Student s;
+        s.setVardas(vardas);
+        s.setPavarde(pavarde);
+        s.setNamuDarbai(namuDarbai);
+        s.setEgz(egz);
         }
-        studentai.push_back(studentas);
+        
+        
         std::cout << "Ar norite tęsti? (T - taip, N - ne): ";
         std::cin >> kitas_stud;
     }
