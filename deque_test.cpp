@@ -119,11 +119,11 @@ int main()
     auto start_time = std::chrono::high_resolution_clock::now();
     std::string kont = "deque";
     std::deque<Student> studentai, kietekai, vargsiukai;
-    failo_nuskaitymas("C:/Users/justa/Documents/GitHub/ObjektinisProgramavimas1/studentai_10000.txt", studentai);
+    failo_nuskaitymas("studentai_10000.txt", studentai);
     issaugoti_studentus(studentai, "studentai_issaugoti_" + kont + ".txt");
     //padalinti1(studentai, kietekai, vargsiukai);
-    //padalinti2(studentai, vargsiukai);
-    padalinti3(studentai, vargsiukai);
+    padalinti2(studentai, vargsiukai);
+    //padalinti3(studentai, vargsiukai);
     issaugoti_studentus(kietekai, "kietekai_" + kont + ".txt");
     issaugoti_studentus(studentai, "vargsiukai_" + kont + ".txt");
     auto finish_time = std::chrono::high_resolution_clock::now();
