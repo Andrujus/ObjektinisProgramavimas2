@@ -78,7 +78,7 @@ void padalinti2(std::deque<Student>& studentai, std::deque<Student>& vargsiukai)
 void padalinti3(std::deque<Student>& studentai, std::deque<Student>& vargsiukai)
 {
     auto start = std::chrono::high_resolution_clock::now();
-
+    studentai.erase(
     std::remove_if(studentai.begin(), studentai.end(), [&](const Student& s) {
         double galutinis_v = GalutinisVidurkis(s.namuDarbai) * 0.4 + s.egz * 0.6;
         if (galutinis_v < 5.0) {
@@ -87,7 +87,9 @@ void padalinti3(std::deque<Student>& studentai, std::deque<Student>& vargsiukai)
         } else {
             return false;
         }
-    });
+    }),
+    studentai.end()
+);
 
     auto end = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> diff = end - start;
@@ -124,8 +126,8 @@ int main()
     //padalinti1(studentai, kietekai, vargsiukai);
     padalinti2(studentai, vargsiukai);
     //padalinti3(studentai, vargsiukai);
-    issaugoti_studentus(kietekai, "kietekai_" + kont + ".txt");
-    issaugoti_studentus(studentai, "vargsiukai_" + kont + ".txt");
+    issaugoti_studentus(studentai, "kietekai_" + kont + ".txt");
+    issaugoti_studentus(vargsiukai, "vargsiukai_" + kont + ".txt");
     auto finish_time = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> diff = finish_time - start_time;
     std::cout << "Failo studentai10000.txt nuskaitymas ir issaugojimas uztruko: " << diff.count() << " s" << std::endl;
