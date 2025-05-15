@@ -87,12 +87,13 @@ void failo_nuskaitymas(const std::string& pav, std::deque<Student>& studentai)
         }
         if (!(rf >> egz))
             throw std::runtime_error("Klaida skaitant egzamino pažymį iš failo.");
-        }
+        
         s.setVardas(vardas);
         s.setPavarde(pavarde);
         s.setNamuDarbai(namuDarbai);
         s.setEgz(egz);
         studentai.push_back(s);
+    }
 }
 void padalinti1(const std::deque<Student>& studentai, std::deque<Student>& kietekai, std::deque<Student>& vargsiukai) {
     auto start = std::chrono::high_resolution_clock::now();
@@ -170,7 +171,7 @@ int main()
     std::deque<Student> studentai, kietekai, vargsiukai;
     failo_nuskaitymas("studentai_10000.txt", studentai);
     padalinti1(studentai, kietekai, vargsiukai);
-    issaugoti_studentus(studentai, "studentai_issaugoti.txt");
+    issaugoti_studentus(studentai, "studentai_issaugoti_deque.txt");
     //padalinti2(studentai, vargsiukai);
     //padalinti3(studentai, vargsiukai);
     issaugoti_studentus(studentai, "kietekai1.txt");
