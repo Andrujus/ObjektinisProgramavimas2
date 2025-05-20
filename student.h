@@ -31,6 +31,12 @@ public:
         return *this;
     }
 
+    Student (Student&& other)
+        : vardas(other.vardas),
+        pavarde(other.pavarde),
+        namuDarbai(other.namuDarbai),
+        egz(other.egz) {}
+
 
     ~Student() = default;
 
