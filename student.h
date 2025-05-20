@@ -37,6 +37,15 @@ public:
         namuDarbai(other.namuDarbai),
         egz(other.egz) {}
 
+    Student& operator=(const Student& other) noexcept{
+        if (this != &other){
+            vardas = other.vardas;
+            pavarde = other.pavarde;
+            namuDarbai = other.namuDarbai;
+            egz = other.egz;
+        }
+        return *this;
+    }
 
     ~Student() = default;
 
