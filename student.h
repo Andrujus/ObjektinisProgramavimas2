@@ -16,6 +16,10 @@ public:
     Student(const std::string& v, const std::string& p, const std::vector<int>& nd, int e) 
         : vardas(v), pavarde(p), namuDarbai(nd), egz(e) {}
 
+
+
+    ~Student() = default;
+
     void setVardas(const std::string& v) { vardas = v; }
     void setPavarde(const std::string& p) { pavarde = p; }
     void setNamuDarbai(const std::vector<int>& nd) { namuDarbai = nd; }
@@ -63,4 +67,4 @@ public:
         return skaiciuotiMediana() * 0.4 + egz * 0.6;
     }
 };
-#endif
+#endif 
