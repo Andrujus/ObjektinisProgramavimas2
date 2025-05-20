@@ -16,7 +16,9 @@ public:
     Student(const std::string& v, const std::string& p, const std::vector<int>& nd, int e) 
         : vardas(v), pavarde(p), namuDarbai(nd), egz(e) {}
 
-
+    Student(const Student& old_stud)
+        : vardas(old_stud.vardas), pavarde(old_stud.pavarde),
+          namuDarbai(old_stud.namuDarbai), egz(old_stud.egz) {}
 
     ~Student() = default;
 
