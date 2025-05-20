@@ -20,6 +20,18 @@ public:
         : vardas(old_stud.vardas), pavarde(old_stud.pavarde),
           namuDarbai(old_stud.namuDarbai), egz(old_stud.egz) {}
 
+    Student& operator=(const Student& other) {
+        if (this != &other)
+        {
+            vardas = other.vardas;
+            pavarde = other.pavarde;
+            namuDarbai = other.namuDarbai;
+            egz = other.egz;
+        }
+        return *this;
+    }
+
+
     ~Student() = default;
 
     void setVardas(const std::string& v) { vardas = v; }
