@@ -38,19 +38,39 @@ std::ostream& operator<<(std::ostream& os, const Student& s) {
     for (int nd : s.namuDarbai) {
         os << nd << " ";
     }
-    os << "Egz: " << s.egz 
-       << " Galutinis (Vid): " << s.getGalutinisVid()
-       << " Galutinis (Med): " << s.getGalutinisMed();
+    os << "Egz: " << s.egz;
     return os;
+}
+
+void ro5_test(){
+    Student a("Justas", "An", {8, 9, 10}, 7);
+    std::cout << a << std::endl;
+
+    Student b(a);
+    std::cout << "Copy: " << b << std::endl;
+
+    Student c(std::move(a));
+    std::cout << "Move: " << c << std::endl;
+    std::cout << "Is ko move:" << a << std::endl;
+
+    Student c = std::move(a);
+    std::cout << "Move assignment: " << c << std::endl;
+    std::cout << "Is ko move:" << a << std::endl;
+
+    Student d;
+    d = b;
+    std::cout << "Copy assignment: " << d << std::endl;
 }
 
 int main() {
 
-    Student student1("Justas", "An", {8, 9, 10}, 7);
+    /*Student student1("Justas", "An", {8, 9, 10}, 7);
     Student student2("Justin", "Bm", {6, 7, 8}, 9);
 
     std::cout << student1 << std::endl;
-    std::cout << student2 << std::endl;
+    std::cout << student2 << std::endl;*/
+    ro5_test();
+
 
 return 0;
 }
