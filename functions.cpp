@@ -124,6 +124,11 @@ void Duom(std::vector<Student>& studentai, int& ch1) {
         if (ch1 == 6) break;
         if (ch1 == 5)
         {
+            std::cout<<"Ar nori generuoti failus? (T - taip, N - ne): ";
+            std::string ats;
+            std::cin >> ats;
+            if (ats == "T" || ats == "t")
+            {
             std::vector<Student> vargsiukai;
             std::vector<Student> kietekai;
             std::vector<int> skaicius = {1000, 10000, 100000};
@@ -146,6 +151,11 @@ void Duom(std::vector<Student>& studentai, int& ch1) {
             }
             issaugoti_studentus(vargsiukai, "vargsiukai.txt");
             issaugoti_studentus(kietekai, "kietekai.txt");
+        }
+            else
+            {
+                std::cout<<"Failai nebuvo sugeneruoti"<<std::endl;
+            }
         }
         if (ch1 == 4) {
             try {
