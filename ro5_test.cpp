@@ -1,4 +1,5 @@
 #include "Student.h"
+#include "Zmogus.h"
 #include <sstream>
 #include <iostream>
 
@@ -42,6 +43,16 @@ std::ostream& operator<<(std::ostream& os, const Student& s) {
     return os;
 }
 
+void base_test(Zmogus& z) {
+    Zmogus* zmogus = &z;
+
+    zmogus->setVardas("Justas");
+    zmogus->setPavarde("Aand");
+
+    std::cout << "Zmogus vardas: " << zmogus->getVardas() << ", pavarde: " << zmogus->getPavarde() << std::endl;
+}
+
+
 void ro5_test(){
     Student a("Justas", "An", {8, 9, 10}, 7);
     std::cout << a << std::endl;
@@ -63,14 +74,14 @@ void ro5_test(){
 }
 
 int main() {
-
+    Student s;
     /*Student student1("Justas", "An", {8, 9, 10}, 7);
     Student student2("Justin", "Bm", {6, 7, 8}, 9);
 
     std::cout << student1 << std::endl;
     std::cout << student2 << std::endl;*/
-    ro5_test();
-
+    //ro5_test();
+    base_test(s);
 
 return 0;
 }
