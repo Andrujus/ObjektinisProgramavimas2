@@ -5,49 +5,52 @@
 #include <vector>
 #include <string>
 #include <algorithm>
+#include "zmogus.h"
 
-class Student {
+class Student : public Zmogus{
 private:
-    std::string vardas;
-    std::string pavarde;
+
     std::vector<int> namuDarbai;
     int egz;
 public:
-    Student() : vardas(""), pavarde(""), egz(0) {}
-    Student(const std::string& v, const std::string& p, const std::vector<int>& nd, int e) 
-        : vardas(v), pavarde(p), namuDarbai(nd), egz(e) {}
+    Student() : Zmogus("", ""), egz(0) {}
+
+    Student(const std::string& v, const std::string& p, const std::vector<int>& nd, int e)
+    : Zmogus(v, p), namuDarbai(nd), egz(e) {}
+
 
     Student(const Student& old_stud)
-        : vardas(old_stud.vardas), pavarde(old_stud.pavarde),
+        : Zmogus(old_stud.vardas, old_stud.pavarde),
           namuDarbai(old_stud.namuDarbai), egz(old_stud.egz) {}
 
 
 
     Student(Student&& other) noexcept
-        : vardas(std::move(other.vardas)),
-        pavarde(std::move(other.pavarde)),
+        : Zmogus(std::move(other.vardas), std::move(other.pavarde)),
         namuDarbai(std::move(other.namuDarbai)),
         egz(other.egz) {}
 
     Student& operator=(const Student& other) {
-        if (this != &other) {
-            vardas = other.vardas;
-            pavarde = other.pavarde;
-            namuDarbai = other.namuDarbai;
-            egz = other.egz;
-        }
-        return *this;
+    if (this != &other) {
+        setVardas(other.getVardas());
+        setPavarde(other.getPavarde());
+        namuDarbai = other.namuDarbai;
+        egz = other.egz;
     }
+    return *this;
+}
+
     
     Student& operator=(Student&& other) noexcept {
-        if (this != &other) {
-            vardas = std::move(other.vardas);
-            pavarde = std::move(other.pavarde);
-            namuDarbai = std::move(other.namuDarbai);
-            egz = other.egz;
-        }
-        return *this;
+    if (this != &other) {
+        setVardas(std::move(other.getVardas()));
+        setPavarde(std::move(other.getPavarde()));
+        namuDarbai = std::move(other.namuDarbai);
+        egz = other.egz;
     }
+    return *this;
+}
+
 
     ~Student() = default;
 
