@@ -55,6 +55,11 @@
         "xutility": "cpp",
         "random": "cpp",
         "fstream": "cpp",
-        "numeric": "cpp"
+        "numeric": "cpp",
+        "chrono": "cpp",
+        "deque": "cpp",
+        "forward_list": "cpp",
+        "ratio": "cpp",
+        "sstream": "cpp"
     }
 }

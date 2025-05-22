@@ -1,6 +1,7 @@
 #ifndef STUDENT_H
 #define STUDENT_H
 
+#include <iostream>
 #include <vector>
 #include <string>
 #include <algorithm>
@@ -20,9 +21,16 @@ public:
         : vardas(old_stud.vardas), pavarde(old_stud.pavarde),
           namuDarbai(old_stud.namuDarbai), egz(old_stud.egz) {}
 
+
+
+    Student(Student&& other) noexcept
+        : vardas(std::move(other.vardas)),
+        pavarde(std::move(other.pavarde)),
+        namuDarbai(std::move(other.namuDarbai)),
+        egz(other.egz) {}
+
     Student& operator=(const Student& other) {
-        if (this != &other)
-        {
+        if (this != &other) {
             vardas = other.vardas;
             pavarde = other.pavarde;
             namuDarbai = other.namuDarbai;
@@ -30,18 +38,12 @@ public:
         }
         return *this;
     }
-
-    Student (Student&& other)
-        : vardas(other.vardas),
-        pavarde(other.pavarde),
-        namuDarbai(other.namuDarbai),
-        egz(other.egz) {}
-
-    Student& operator=(const Student& other) noexcept{
-        if (this != &other){
-            vardas = other.vardas;
-            pavarde = other.pavarde;
-            namuDarbai = other.namuDarbai;
+    
+    Student& operator=(Student&& other) noexcept {
+        if (this != &other) {
+            vardas = std::move(other.vardas);
+            pavarde = std::move(other.pavarde);
+            namuDarbai = std::move(other.namuDarbai);
             egz = other.egz;
         }
         return *this;
@@ -95,5 +97,8 @@ public:
     double skaiciuotiGalutiniMediana() const {
         return skaiciuotiMediana() * 0.4 + egz * 0.6;
     }
+
+    friend std::ostream& operator<<(std::ostream& os, const Student& s);
+    friend std::istream& operator>>(std::istream& is, Student& s);
 };
 #endif 
