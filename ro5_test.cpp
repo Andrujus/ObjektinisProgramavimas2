@@ -49,7 +49,7 @@ void base_test(Zmogus& z) {
     zmogus->setVardas("Justas");
     zmogus->setPavarde("Aand");
 
-    std::cout << "Zmogus vardas: " << zmogus->getVardas() << ", pavarde: " << zmogus->getPavarde() << std::endl;
+    std::cout << "vardas: " << zmogus->getVardas() << " pavarde: " << zmogus->getPavarde() << std::endl;
 }
 
 
@@ -80,7 +80,7 @@ int main() {
 
     std::cout << student1 << std::endl;
     std::cout << student2 << std::endl;*/
-    //ro5_test();
+    ro5_test();
     base_test(s);
 
 return 0;
