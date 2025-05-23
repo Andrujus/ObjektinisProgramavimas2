@@ -90,12 +90,17 @@ void padalinti_studentus (std::vector<Student>& studentai, std::vector<Student>&
     std::chrono::duration<double> diff = end - start;
     std::cout << "Studentų padalijimas užtruko: " << diff.count() << " s" << std::endl;
 }
-void issaugoti_studentus(const std::vector<Student>& studentai, const std::string& failo_pav) {
+void issaugoti_studentus(std::vector<Student>& studentai, const std::string& failo_pav) {
     std::ofstream out(failo_pav);
     if (!out) {
         std::cerr << "Klaida atidarant failą: " << failo_pav << std::endl;
         return;
     }
+    std::sort(studentai.begin(), studentai.end(), [](const Student& a, const Student& b) {
+        double galutinis_a = Vidurkis(a.namuDarbai) * 0.4 + a.egz * 0.6;
+        double galutinis_b = Vidurkis(b.namuDarbai) * 0.4 + b.egz * 0.6;
+        return galutinis_a < galutinis_b;
+    });
 
     out << std::fixed << std::setprecision(2);
     out << std::setw(15) << "Vardas" << std::setw(15) << "Pavarde" << std::setw(15) << "Galutinis (vid.)\n";
