@@ -44,6 +44,7 @@ std::ostream& operator<<(std::ostream& os, const Student& s) {
 }
 
 void base_test(Zmogus& z) {
+    std::cout << "Bazines klases testavimas" <<std::endl;
     Zmogus* zmogus = &z;
 
     zmogus->setVardas("Justas");
