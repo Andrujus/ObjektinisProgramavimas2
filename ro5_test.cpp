@@ -53,13 +53,13 @@ void ro5_test(){
     std::cout << "Move: " << c << std::endl;
     std::cout << "Is ko move:" << a << std::endl;
 
-    Student c = std::move(a);
-    std::cout << "Move assignment: " << c << std::endl;
-    std::cout << "Is ko move:" << a << std::endl;
+    Student d = std::move(b);
+    std::cout << "Move assignment: " << d << std::endl;
+    std::cout << "Is ko move:" << b << std::endl;
 
-    Student d;
-    d = b;
-    std::cout << "Copy assignment: " << d << std::endl;
+    Student e;
+    e = d;
+    std::cout << "Copy assignment: " << e << std::endl;
 }
 
 int main() {
