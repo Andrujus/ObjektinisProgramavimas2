@@ -90,12 +90,18 @@ void padalinti3(std::vector<Student>& studentai, std::vector<Student>& vargsiuka
     std::cout << "Studentų padalijimas (3) užtruko: " << diff.count() << " s" << std::endl;
 }
 
-void issaugoti_studentus(const std::vector<Student>& studentai, const std::string& failo_pav) {
+void issaugoti_studentus(std::vector<Student>& studentai, const std::string& failo_pav) {
     std::ofstream out(failo_pav);
     if (!out) {
         std::cerr << "Klaida atidarant failą: " << failo_pav << std::endl;
         return;
     }
+    
+    std::sort(studentai.begin(), studentai.end(), [](const Student& a, const Student& b) {
+        double galutinis_a = GalutinisVidurkis(a.namuDarbai) * 0.4 + a.egz * 0.6;
+        double galutinis_b = GalutinisVidurkis(b.namuDarbai) * 0.4 + b.egz * 0.6;
+        return galutinis_a < galutinis_b;
+    });
 
     out << std::fixed << std::setprecision(2);
     out << std::setw(15) << "Vardas" << std::setw(15) << "Pavarde" << std::setw(15) << "Galutinis (vid.)\n";
@@ -116,8 +122,9 @@ int main()
     auto start_time = std::chrono::high_resolution_clock::now();
     std::vector<Student> studentai, kietekai, vargsiukai;
     failo_nuskaitymas("studentai_10000.txt", studentai);
+    issaugoti_studentus(studentai, "studentai_issaugoti_vector.txt");
     padalinti1(studentai, kietekai, vargsiukai);
-    issaugoti_studentus(studentai, "studentai_issaugoti.txt");
+    
     //padalinti2(studentai, vargsiukai);
     //padalinti3(studentai, vargsiukai);
     issaugoti_studentus(studentai, "kietekai1.txt");
