@@ -52,7 +52,9 @@ public:
 }
 
 
-    ~Student() = default;
+    ~Student() {
+        namuDarbai.clear();
+    }
 
     void setVardas(const std::string& v) { vardas = v; }
     void setPavarde(const std::string& p) { pavarde = p; }
