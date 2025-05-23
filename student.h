@@ -28,6 +28,8 @@ public:
     double getGalutinisVid() const { return skaiciuotiGalutiniVidurki(); }
     double getGalutinisMed() const { return skaiciuotiGalutiniMediana(); }
 
+    ~Student() = default;
+
     static double Vidurkis(const std::vector<int>& pazymiai) {
         if (pazymiai.empty()) return 0.0;
         double suma = 0.0;
