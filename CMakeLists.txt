@@ -4,14 +4,6 @@ project(OOP)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-set(SOURCES
-    main.cpp
-    functions.cpp
-    masyvas.cpp
-    vektoriai.cpp
-    deque_test.cpp
-    list_test.cpp
-    vector_test.cpp
-)
-
-add_executable(studentai ${SOURCES})
+add_executable(vektoriai vector_test.cpp)
+add_executable(list list_test.cpp)
+add_executable(deque deque_test.cpp)
