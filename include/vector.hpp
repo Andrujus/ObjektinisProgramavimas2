@@ -7,8 +7,55 @@
 template <typename T>
 class Vector {
 public:
+
+    
     Vector(size_t size = 0)
-        : size_(size), capacity_(size > 0 ? size : 1), data_(new T[capacity_]) {}
+    : size_(size), capacity_(size > 0 ? size : 1) {
+    data_ = new T[capacity_];
+}
+
+
+
+    Vector(const Vector& other)
+    : size_(other.size_), capacity_(other.capacity_), data_(new T[other.capacity_]) {
+    for (size_t i = 0; i < size_; ++i)
+        data_[i] = other.data_[i];
+    }
+
+
+    Vector& operator=(const Vector& other) {
+        if (this != &other) {
+            delete[] data_;
+            size_ = other.size_;
+            capacity_ = other.capacity_;
+            data_ = new T[capacity_];
+            for (size_t i = 0; i < size_; ++i)
+                data_[i] = other.data_[i];
+        }
+    return *this;
+    }
+
+
+    Vector(Vector&& other) noexcept
+        : data_(other.data_), size_(other.size_), capacity_(other.capacity_) {
+        other.data_ = nullptr;
+        other.size_ = 0;
+        other.capacity_ = 0;
+    }
+
+
+    Vector& operator=(Vector&& other) noexcept {
+        if (this != &other) {
+            delete[] data_;
+            data_ = other.data_;
+            size_ = other.size_;
+            capacity_ = other.capacity_;
+            other.data_ = nullptr;
+            other.size_ = 0;
+            other.capacity_ = 0;
+        }
+        return *this;
+    }
 
     ~Vector() {
         delete[] data_;
