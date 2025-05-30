@@ -2,13 +2,14 @@
 #include "student.h"
 #include <chrono>
 #include <iostream>
+#include "include/vector.hpp"
 
 int main() {
     std::chrono::time_point<std::chrono::system_clock> start, end;
     std::chrono::duration<double> diff;
     int ch1;
-    std::vector<Student> studentai;
-    std::vector<int> skaicius = {1000, 10000, 100000};
+    Vector<Student> studentai;
+    Vector<int> skaicius = {1000, 10000, 100000};
 
     start = std::chrono::system_clock::now();
     Duom(studentai, ch1);

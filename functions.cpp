@@ -1,4 +1,6 @@
-#include "functions.h"
+
+#include "student.h"
+#include "include/vector.hpp"
 #include <iostream>
 #include <fstream>
 #include <iomanip>
@@ -6,7 +8,7 @@
 #include <random>
 #include <chrono>
 
-double apskaiciuotiMediana(std::vector<int> pazymiai) {
+double apskaiciuotiMediana(Vector<int> pazymiai) {
     if (pazymiai.empty()) return 0.0;
     std::sort(pazymiai.begin(), pazymiai.end());
     size_t dydis = pazymiai.size();
@@ -18,8 +20,8 @@ double apskaiciuotiMediana(std::vector<int> pazymiai) {
 }
 
 void gen_name(std::string& vardas, std::string& pavarde) {
-    std::vector<std::string> vardai = {"Pijus", "Justas", "Kostas", "Petras"};
-    std::vector<std::string> pavardes = {"Savanevicius", "Andru", "Baranauskas", "Dovydaitis"};
+    Vector<std::string> vardai = {"Pijus", "Justas", "Kostas", "Petras"};
+    Vector<std::string> pavardes = {"Savanevicius", "Andru", "Baranauskas", "Dovydaitis"};
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> distr(0, vardai.size() - 1);
@@ -49,13 +51,13 @@ void gen_file(const std::string& pav, int kiek)
     std::cout << "Failo " << pav << " generavimas užtruko: " << diff.count() << " s" << std::endl;
     gf.close();
 }
-void failo_nuskaitymas(const std::string& pav, int kiek, std::vector<Student>& studentai)
+void failo_nuskaitymas(const std::string& pav, int kiek, Vector<Student>& studentai)
 {
     std::ifstream rf(pav);
     if (!rf) std::cout<<"failas neatsidaro"<<std::endl;
     std::string vardas, pavarde;
     while (rf >> vardas >> pavarde) {
-        std::vector<int> namuDarbai;
+        Vector<int> namuDarbai;
         for (int i = 0; i < 5; i++) {
             int pazymys;
             rf >> pazymys;
@@ -71,7 +73,7 @@ void failo_nuskaitymas(const std::string& pav, int kiek, std::vector<Student>& s
         studentai.push_back(s);  
     }
 }
-void padalinti_studentus (std::vector<Student>& studentai, std::vector<Student>& vargsiukai, std::vector<Student>& kietekai)
+void padalinti_studentus (Vector<Student>& studentai, Vector<Student>& vargsiukai, Vector<Student>& kietekai)
 {
     auto start = std::chrono::high_resolution_clock::now();
     for (const auto& s : studentai)
@@ -86,7 +88,7 @@ void padalinti_studentus (std::vector<Student>& studentai, std::vector<Student>&
     std::chrono::duration<double> diff = end - start;
     std::cout << "Studentų padalijimas užtruko: " << diff.count() << " s" << std::endl;
 }
-void issaugoti_studentus(const std::vector<Student>& studentai, const std::string& failo_pav) {
+void issaugoti_studentus(const Vector<Student>& studentai, const std::string& failo_pav) {
     std::ofstream out(failo_pav);
     if (!out) {
         std::cerr << "Klaida atidarant failą: " << failo_pav << std::endl;
@@ -106,7 +108,7 @@ void issaugoti_studentus(const std::vector<Student>& studentai, const std::strin
     out.close();
 }
 
-void Duom(std::vector<Student>& studentai, int& ch1) {
+void Duom(Vector<Student>& studentai, int& ch1) {
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> distr(1, 10);
@@ -124,9 +126,9 @@ void Duom(std::vector<Student>& studentai, int& ch1) {
             std::cin >> ats;
             if (ats == "T" || ats == "t")
             {
-            std::vector<Student> vargsiukai;
-            std::vector<Student> kietekai;
-            std::vector<int> skaicius = {1000, 10000, 100000};
+            Vector<Student> vargsiukai;
+            Vector<Student> kietekai;
+            Vector<int> skaicius = {1000, 10000, 100000};
             for (int i=0; i<skaicius.size(); i++)
             {
                 std::string pav = "studentai_" + std::to_string(skaicius[i]) + ".txt";
@@ -168,7 +170,7 @@ void Duom(std::vector<Student>& studentai, int& ch1) {
 
                 while (true) {
                     std::string vardas, pavarde;
-                    std::vector<int> namuDarbai;
+                    Vector<int> namuDarbai;
                     int egz;
                     if (!(rf >> vardas >> pavarde)) break;
 
@@ -197,7 +199,7 @@ void Duom(std::vector<Student>& studentai, int& ch1) {
         }
         if (ch1 == 1) {
             std::string vardas, pavarde;
-            std::vector<int> namuDarbai;
+            Vector<int> namuDarbai;
             int egz;
             try{
             std::cout << "Įveskite studento vardą: ";
@@ -232,7 +234,7 @@ void Duom(std::vector<Student>& studentai, int& ch1) {
         }
         if (ch1 == 2) {
             std::string vardas, pavarde;
-            std::vector<int> namuDarbai;
+            Vector<int> namuDarbai;
             int egz;
             try{
             std::cout << "Įveskite studento vardą: ";
@@ -258,7 +260,7 @@ void Duom(std::vector<Student>& studentai, int& ch1) {
         }
         if (ch1 == 3) {
             std::string vardas, pavarde;
-            std::vector<int> namuDarbai;
+            Vector<int> namuDarbai;
             int egz;
 
             gen_name(vardas, pavarde);
@@ -281,7 +283,7 @@ void Duom(std::vector<Student>& studentai, int& ch1) {
     }
 }
 
-void Rez(std::vector<Student>& studentai, int& ch1) {
+void Rez(Vector<Student>& studentai, int& ch1) {
     while (ch1 != 5) {
         std::cout << "Pasirinkite rikiavimo būdą:\n1 - pagal vardą\n2 - pagal pavardę\n3 - pagal vidurkį\n4 - pagal medianą\n";
     int ch;

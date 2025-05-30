@@ -69,7 +69,7 @@ public:
     double getGalutinisVid() const { return skaiciuotiGalutiniVidurki(); }
     double getGalutinisMed() const { return skaiciuotiGalutiniMediana(); }
 
-    static double Vidurkis(const std::vector<int>& pazymiai) {
+    static double Vidurkis(const Vector<int>& pazymiai) {
         if (pazymiai.empty()) return 0.0;
         double suma = 0.0;
         for (int pazymys : pazymiai) suma += pazymys;
