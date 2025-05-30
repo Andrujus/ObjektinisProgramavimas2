@@ -91,6 +91,15 @@ public:
         capacity_ = new_capacity;
     }
 
+    Vector(std::initializer_list<T> init)
+        : size_(init.size()), capacity_(init.size()), data_(new T[capacity_]) {
+        size_t i = 0;
+        for (const auto& value : init) {
+            data_[i++] = value;
+        }
+    }
+
+
     T& operator[](std::size_t index) {
         return data_[index];
     }
@@ -108,6 +117,23 @@ public:
         if (index >= size_) throw std::out_of_range("Index out of range");
         return data_[index];
     }
+
+    T* begin() {
+        return data_;
+    }
+
+    T* end() {
+        return data_ + size_;
+    }
+
+    const T* begin() const {
+        return data_;
+    }
+
+    const T* end() const {
+        return data_ + size_;
+    }
+
 
     T& front() {
         return data_[0];
@@ -137,17 +163,15 @@ public:
         return size_ == 0;
     }
 
-private:
-    T* data_;
-    std::size_t size_;
-    std::size_t capacity_;
-
     void clear() {
         for (std::size_t i = 0; i < size_; ++i) {
             data_[i].~T();
         }
         size_ = 0;
     }
+private:
+    T* data_;
+    std::size_t size_;
+    std::size_t capacity_;
 };
-
 #endif

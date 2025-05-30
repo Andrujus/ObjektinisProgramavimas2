@@ -6,16 +6,17 @@
 #include <string>
 #include <algorithm>
 #include "zmogus.h"
+#include "include/vector.hpp"
 
 class Student : public Zmogus{
 private:
 
-    std::vector<int> namuDarbai;
+    Vector<int> namuDarbai;
     int egz;
 public:
     Student() : Zmogus("", ""), egz(0) {}
 
-    Student(const std::string& v, const std::string& p, const std::vector<int>& nd, int e)
+    Student(const std::string& v, const std::string& p, const Vector<int>& nd, int e)
     : Zmogus(v, p), namuDarbai(nd), egz(e) {}
 
 
@@ -58,12 +59,12 @@ public:
 
     void setVardas(const std::string& v) { vardas = v; }
     void setPavarde(const std::string& p) { pavarde = p; }
-    void setNamuDarbai(const std::vector<int>& nd) { namuDarbai = nd; }
+    void setNamuDarbai(const Vector<int>& nd) { namuDarbai = nd; }
     void setEgz(int e) { egz = e; }
 
     std::string getVardas() const { return vardas; }
     std::string getPavarde() const { return pavarde; }
-    std::vector<int> getNamuDarbai() const { return namuDarbai; }
+    Vector<int> getNamuDarbai() const { return namuDarbai; }
     int getEgz() const { return egz; }
     double getGalutinisVid() const { return skaiciuotiGalutiniVidurki(); }
     double getGalutinisMed() const { return skaiciuotiGalutiniMediana(); }
@@ -86,7 +87,7 @@ public:
 
     double skaiciuotiMediana() const {
         if (namuDarbai.empty()) return 0.0;
-        std::vector<int> temp = namuDarbai;
+        Vector<int> temp = namuDarbai;
         std::sort(temp.begin(), temp.end());
         size_t dydis = temp.size();
         if (dydis % 2 == 0) {
@@ -106,4 +107,5 @@ public:
     friend std::ostream& operator<<(std::ostream& os, const Student& s);
     friend std::istream& operator>>(std::istream& is, Student& s);
 };
+
 #endif 

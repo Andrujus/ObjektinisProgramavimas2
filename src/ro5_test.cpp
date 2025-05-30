@@ -1,12 +1,13 @@
-#include "Student.h"
-#include "Zmogus.h"
+#include "../Student.h"
+#include "../Zmogus.h"
+#include "../include/vector.hpp"
 #include <sstream>
 #include <iostream>
 
 std::istream& operator>>(std::istream& is, Student& s) {
     std::string vardas, pavarde;
     int egz;
-    std::vector<int> namuDarbai;
+    Vector<int> namuDarbai;
     std::string eilute;
 
     is >> vardas >> pavarde;
@@ -55,7 +56,8 @@ void base_test(Zmogus& z) {
 
 
 void ro5_test(){
-    Student a("Justas", "An", {8, 9, 10}, 7);
+
+    Student a("Justas", "An", Vector<int>{8, 9, 10}, 7);
     std::cout << a << std::endl;
 
     Student b(a);
